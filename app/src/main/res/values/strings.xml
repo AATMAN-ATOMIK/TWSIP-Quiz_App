@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">QuizApp</string>
+    <string name="quiz_app">Quiz App</string>
+    <string name="login_to_continue">Login To Continue</string>
+    <string name="enter_email">Enter Email</string>
+    <string name="enter_password">Enter Password</string>
+    <string name="login">Login</string>
+    <string name="register"><u>Register</u></string>
+    <string name="choose_category">Choose Category</string>
+    <string name="user_name">User Name</string>
+    <string name="category_name">Category Name</string>
+    <string name="choose_difficulty">Choose Difficulty Level</string>
+    <string name="enter_user_name">Enter User Name</string>
+    <string name="register_btn">Register</string>
+    <string name="easy">Easy</string>
+    <string name="medium">Medium</string>
+    <string name="hard">Hard</string>
+    <string name="quiz_name">Quiz Name</string>
+    <string name="question_1_10">Question 1 / 10</string>
+    <string name="timer">Time Remain 60s</string>
+</resources>

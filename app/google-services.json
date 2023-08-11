@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "709588885875",
+    "project_id": "quiz-app-d5d6d",
+    "storage_bucket": "quiz-app-d5d6d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:709588885875:android:69e4c490087ff625b5e506",
+        "android_client_info": {
+          "package_name": "com.atomikak.quizapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "709588885875-317uc39h966uik69egmgsf8h341ja06u.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAmWlQwtSKVBSI2tBfbnWjhspO-m8RT3Gk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "709588885875-317uc39h966uik69egmgsf8h341ja06u.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

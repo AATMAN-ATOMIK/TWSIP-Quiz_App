@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@drawable/linear_background"
+    android:layout_height="match_parent"
+
+    tools:context=".SplashScreen">
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/quiz_app"
+        android:fontFamily="@font/hanged_letters"
+        android:textSize="88dp"
+        android:textColor="@color/white"
+        android:gravity="center"
+        android:shadowColor="@color/black"
+        android:shadowDy="10"
+        android:shadowDx="10"
+        android:shadowRadius="2"/>
+
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/lottie"
+        android:layout_width="match_parent"
+        android:layout_height="350dp"
+        android:layout_centerInParent="true"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/loading_lottie" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/lottie"
+        android:text="Test Your Brain"
+        android:layout_marginTop="25dp"
+        android:textSize="28dp"
+        android:textColor="@color/white"
+        android:fontFamily="@font/chocolate_bar_demo"
+        android:shadowColor="@color/black"
+        android:shadowDy="10"
+        android:shadowDx="10"
+        android:shadowRadius="2"
+        android:gravity="center"
+        />
+
+
+</RelativeLayout>
