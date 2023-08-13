@@ -18,4 +18,5 @@
     <string name="quiz_name">Quiz Name</string>
     <string name="question_1_10">Question 1 / 10</string>
     <string name="timer">Time Remain 60s</string>
+    <string name="complete">Quiz Completed</string>
 </resources>

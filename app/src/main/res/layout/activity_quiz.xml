@@ -76,6 +76,7 @@
         android:id="@+id/recv_questions"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+
         android:layout_below="@id/q_que_counter"
         tools:listitem="@layout/question_layout"
         />

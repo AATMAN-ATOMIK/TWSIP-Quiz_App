@@ -1,18 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:background="@color/transperant"
     android:gravity="center_vertical"
-    android:padding="10dp"
-    android:layout_height="match_parent">
+    android:padding="10dp">
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/card_que"
-        app:cardCornerRadius="15dp"
-        android:minHeight="100dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/white"
+        android:minHeight="100dp"
+        app:cardCornerRadius="15dp">
 
         <TextView
             android:id="@+id/ql_question"
@@ -20,96 +21,75 @@
             android:layout_height="match_parent"
             android:layout_gravity="center"
             android:gravity="center"
-            android:textSize="18sp"
-            android:textColor="@color/black"
-            android:textStyle="bold"
             android:padding="20dp"
-            android:text="This is Test Question To Test."/>
+            android:text="This is Test Question To Test."
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
     </com.google.android.material.card.MaterialCardView>
 
-    <com.google.android.material.card.MaterialCardView
+
+    <TextView
+        android:id="@+id/ql_option1"
         android:layout_width="match_parent"
-        android:id="@+id/card_op1"
+        android:layout_height="wrap_content"
         android:layout_below="@id/card_que"
-        android:layout_marginTop="20dp"
-        app:cardCornerRadius="25dp"
-        android:layout_height="wrap_content">
+        android:layout_marginVertical="10dp"
+        android:background="@drawable/button_quiz_option"
+        android:elevation="10dp"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="Option"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/ql_option1"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:textSize="18sp"
-            android:textColor="@color/black"
-            android:textStyle="bold"
-            android:padding="10dp"
-            android:text="Option"/>
 
-    </com.google.android.material.card.MaterialCardView>
-
-    <com.google.android.material.card.MaterialCardView
+    <TextView
+        android:id="@+id/ql_option2"
         android:layout_width="match_parent"
-        android:id="@+id/card_op2"
-        android:layout_below="@id/card_op1"
-        android:layout_marginTop="20dp"
-        app:cardCornerRadius="25dp"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ql_option1"
+        android:layout_marginVertical="10dp"
+        android:gravity="center"
+        android:background="@drawable/button_quiz_option"
+        android:elevation="10dp"
+        android:padding="10dp"
+        android:text="Option"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/ql_option2"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:textSize="18sp"
-            android:textColor="@color/black"
-            android:textStyle="bold"
-            android:padding="10dp"
-            android:text="Option"/>
-
-    </com.google.android.material.card.MaterialCardView>
-
-
-    <com.google.android.material.card.MaterialCardView
+    <TextView
+        android:id="@+id/ql_option3"
         android:layout_width="match_parent"
-        android:id="@+id/card_op3"
-        android:layout_below="@id/card_op2"
-        android:layout_marginTop="20dp"
-        app:cardCornerRadius="25dp"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ql_option2"
+        android:layout_marginVertical="10dp"
+        android:gravity="center"
+        android:background="@drawable/button_quiz_option"
+        android:elevation="10dp"
+        android:padding="10dp"
+        android:text="Option"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/ql_option3"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:textSize="18sp"
-            android:textColor="@color/black"
-            android:textStyle="bold"
-            android:padding="10dp"
-            android:text="Option"/>
 
-    </com.google.android.material.card.MaterialCardView>
-
-    <com.google.android.material.card.MaterialCardView
+    <TextView
+        android:id="@+id/ql_option4"
         android:layout_width="match_parent"
-        android:id="@+id/card_op4"
-        android:layout_below="@id/card_op3"
-        android:layout_marginTop="20dp"
-        app:cardCornerRadius="25dp"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ql_option3"
+        android:layout_marginVertical="10dp"
+        android:gravity="center"
+        android:padding="10dp"
+        android:background="@drawable/button_quiz_option"
+        android:elevation="10dp"
+        android:text="Option"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/ql_option4"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:textSize="18sp"
-            android:textColor="@color/black"
-            android:textStyle="bold"
-            android:padding="10dp"
-            android:text="Option"/>
-
-    </com.google.android.material.card.MaterialCardView>
 </RelativeLayout>
