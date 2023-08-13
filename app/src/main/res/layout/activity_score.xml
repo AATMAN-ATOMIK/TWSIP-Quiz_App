@@ -19,7 +19,7 @@
         android:paddingVertical="10dp">
 
         <TextView
-            android:id="@+id/m_user_name"
+            android:id="@+id/s_user_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
@@ -49,6 +49,7 @@
     </RelativeLayout>
 
     <com.google.android.material.card.MaterialCardView
+        android:id="@+id/score_card"
         android:layout_width="match_parent"
         android:layout_height="250dp"
         android:layout_below="@id/s_tool_Bar"
@@ -65,15 +66,16 @@
                 android:layout_width="150dp"
                 android:layout_height="150dp"
                 android:layout_centerVertical="true"
+                android:elevation="10dp"
                 android:src="@color/pink" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
                 android:layout_toEndOf="@id/s_rImage"
+                android:gravity="center"
                 android:orientation="vertical">
 
                 <TextView
@@ -108,8 +110,41 @@
 
             </LinearLayout>
 
+
         </RelativeLayout>
 
     </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/score_card">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Score List"
+                android:fontFamily="@font/chocolate_bar_demo"
+                android:gravity="center"
+                android:padding="10dp"
+                android:textSize="18sp"
+                android:textColor="@color/pink"
+                />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+
+                android:layout_height="match_parent" />
+
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
 
 </RelativeLayout>

@@ -60,9 +60,12 @@ class DifficultyActivity : AppCompatActivity() {
     }
 
     private fun goToQuiz(s: String) {
+        val userName = intent.getStringExtra("userName")
         val intent = Intent(this@DifficultyActivity, QuizActivity::class.java)
         intent.putExtra("difficulty", s)
         intent.putExtra("key", key)
+        intent.putExtra("c_name", d_quiz_category.text.toString())
+        intent.putExtra("userName", userName)
         startActivity(intent)
     }
 

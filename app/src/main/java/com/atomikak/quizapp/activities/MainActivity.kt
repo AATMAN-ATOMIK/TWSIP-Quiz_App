@@ -11,11 +11,9 @@ import com.airbnb.lottie.LottieAnimationView
 import com.atomikak.quizapp.R
 import com.atomikak.quizapp.adapters.CategoryAdapter
 import com.atomikak.quizapp.supportclasses.Category
-import com.google.android.material.progressindicator.CircularProgressIndicator
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import kotlinx.coroutines.awaitAll
 
 class MainActivity : AppCompatActivity() {
 
@@ -82,7 +80,7 @@ class MainActivity : AppCompatActivity() {
         if (categoryList.isEmpty()) {
             Toast.makeText(this, "hi", Toast.LENGTH_SHORT).show()
         } else {
-            cAdapter = CategoryAdapter(this@MainActivity, categoryList)
+            cAdapter = CategoryAdapter(this@MainActivity, categoryList,m_user_name.text.toString())
             m_recv_category.layoutManager =
                 GridLayoutManager(this@MainActivity, 2, GridLayoutManager.VERTICAL, false)
             m_recv_category.setHasFixedSize(true)

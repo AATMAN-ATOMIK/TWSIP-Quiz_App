@@ -49,6 +49,8 @@ class QuizActivity : AppCompatActivity(), RecvClickListener {
 
     //score
     private var score = 0
+    private var correct = 0
+    private var incorrect = 0
 
     //timer
     private lateinit var countDownTimer: CountDownTimer
@@ -74,10 +76,11 @@ class QuizActivity : AppCompatActivity(), RecvClickListener {
     private fun startTimer() {
         countDownTimer = object : CountDownTimer(10000, 1000) {
             override fun onTick(millisUntilFinished: Long) {
-                q_timer.setText("Time Ramain ${millisUntilFinished / 1000}")
+                q_timer.setText("Time Ramain ${millisUntilFinished / 1000}s")
             }
 
             override fun onFinish() {
+                incorrect++
                 goToNextQuestion()
             }
         }
@@ -92,7 +95,20 @@ class QuizActivity : AppCompatActivity(), RecvClickListener {
             recv_questions.scrollToPosition(qIndex)
             startTimer()
         } else {
+
+            val category = intent.getStringExtra("c_name")
+            val diff = intent.getStringExtra("difficulty").toString()
+            val difColReference = intent.getStringExtra("key").toString()
+            val userName = intent.getStringExtra("userName").toString()
+
             val intent = Intent(this@QuizActivity, ScoreActivity::class.java)
+            intent.putExtra("score",score)
+            intent.putExtra("correct",correct)
+            intent.putExtra("incorrect",incorrect)
+            intent.putExtra("QuizName",category)
+            intent.putExtra("difficulty",diff)
+            intent.putExtra("key",difColReference)
+            intent.putExtra("userName",userName)
             startActivity(intent)
         }
     }
@@ -142,8 +158,10 @@ class QuizActivity : AppCompatActivity(), RecvClickListener {
         if (quizList[position].correct == answer) {
             it.setBackgroundResource(R.drawable.positive_button)
             score++
+            correct++
         } else {
             it.setBackgroundResource(R.drawable.negative_button)
+            incorrect++
         }
 
         countDownTimer.cancel()

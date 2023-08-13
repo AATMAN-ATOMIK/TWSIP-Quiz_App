@@ -2,11 +2,9 @@ package com.atomikak.quizapp.adapters
 
 import android.app.AlertDialog
 import android.content.Context
-import android.content.DialogInterface
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
-import android.view.View.OnLongClickListener
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.core.net.toUri
@@ -18,7 +16,7 @@ import com.bumptech.glide.Glide
 import com.google.android.material.card.MaterialCardView
 import de.hdodenhof.circleimageview.CircleImageView
 
-class CategoryAdapter(val context: Context, val categoryList: ArrayList<Category>) :
+class CategoryAdapter(val context: Context, val categoryList: ArrayList<Category>,val userName: String) :
     RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryViewHolder {
@@ -40,6 +38,7 @@ class CategoryAdapter(val context: Context, val categoryList: ArrayList<Category
             val intent = Intent(context,DifficultyActivity::class.java)
             intent.putExtra("c_name",categoryList[position].c_name.toString())
             intent.putExtra("key",categoryList[position].key.toString())
+            intent.putExtra("userName",userName)
             context.startActivity(intent)
         }
 
