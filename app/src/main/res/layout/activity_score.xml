@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/linear_background"
+    android:paddingHorizontal="10dp"
+    android:paddingTop="10dp"
+    tools:context=".activities.ScoreActivity">
+
+
+    <RelativeLayout
+        android:id="@+id/s_tool_Bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingVertical="10dp">
+
+        <TextView
+            android:id="@+id/m_user_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:fontFamily="@font/chocolate_bar_demo"
+            android:paddingHorizontal="10dp"
+            android:shadowColor="@color/black"
+            android:shadowDx="10"
+            android:shadowDy="8"
+            android:shadowRadius="2"
+            android:text="@string/complete"
+            android:textColor="@color/white"
+            android:textSize="22sp" />
+
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/s_btn_profile"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginHorizontal="10dp"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/user"
+            app:lottie_speed="0.2" />
+
+    </RelativeLayout>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:layout_below="@id/s_tool_Bar"
+        android:layout_marginTop="10dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:paddingHorizontal="10dp">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/s_rImage"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_centerVertical="true"
+                android:src="@color/pink" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_toEndOf="@id/s_rImage"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/score"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@id/s_rImage"
+
+                    android:fontFamily="@font/chocolate_bar_demo"
+                    android:text="Score : 100"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/correct"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/score"
+                    android:layout_toEndOf="@id/s_rImage"
+                    android:fontFamily="@font/chocolate_bar_demo"
+                    android:text="Correct : 8"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/incorrect"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/correct"
+                    android:layout_toEndOf="@id/s_rImage"
+                    android:fontFamily="@font/chocolate_bar_demo"
+                    android:text="Incorrect : 2"
+                    android:textSize="18sp" />
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+</RelativeLayout>
