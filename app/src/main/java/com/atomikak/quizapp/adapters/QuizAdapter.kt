@@ -40,27 +40,15 @@ class QuizAdapter(
         holder.ql_option4.text = quizList[position].options[3]
 
         holder.ql_option1.setOnClickListener {
-            holder.ql_option4.isEnabled = false
-            holder.ql_option2.isEnabled = false
-            holder.ql_option3.isEnabled = false
             recvClickListener.onItemClick(it,position,quizList[position].options[0])
         }
         holder.ql_option2.setOnClickListener {
-            holder.ql_option1.isEnabled = false
-            holder.ql_option4.isEnabled = false
-            holder.ql_option3.isEnabled = false
             recvClickListener.onItemClick(it,position,quizList[position].options[1])
         }
         holder.ql_option3.setOnClickListener {
-            holder.ql_option1.isEnabled = false
-            holder.ql_option2.isEnabled = false
-            holder.ql_option4.isEnabled = false
             recvClickListener.onItemClick(it,position,quizList[position].options[2])
         }
         holder.ql_option4.setOnClickListener {
-            holder.ql_option1.isEnabled = false
-            holder.ql_option2.isEnabled = false
-            holder.ql_option3.isEnabled = false
             recvClickListener.onItemClick(it,position,quizList[position].options[3])
         }
     }

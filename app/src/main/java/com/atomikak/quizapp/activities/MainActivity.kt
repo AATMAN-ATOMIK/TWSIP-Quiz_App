@@ -1,5 +1,6 @@
 package com.atomikak.quizapp.activities
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -22,6 +23,7 @@ class MainActivity : AppCompatActivity() {
 
     //lotti button
     private lateinit var m_btn_profile: LottieAnimationView
+    private lateinit var loader: LottieAnimationView
 
     //textview
     private lateinit var m_user_name: TextView
@@ -55,12 +57,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun getCategoryList() {
-        collectionRef.orderBy("c_id").addSnapshotListener { value, error ->
-            if (error != null) {
-                Log.d("DD: ", error.message.toString())
-            }
-
-            for (category in value!!) {
+        collectionRef.orderBy("c_id").get().addOnCompleteListener {
+            for (category in it.result) {
                 categoryList.add(
                     Category(
                         key=category.id,
@@ -85,6 +83,7 @@ class MainActivity : AppCompatActivity() {
                 GridLayoutManager(this@MainActivity, 2, GridLayoutManager.VERTICAL, false)
             m_recv_category.setHasFixedSize(true)
             m_recv_category.adapter = cAdapter
+            loader.visibility = LottieAnimationView.GONE
         }
     }
 
@@ -92,6 +91,17 @@ class MainActivity : AppCompatActivity() {
         m_recv_category = findViewById(R.id.m_recv_category)
         m_btn_profile = findViewById(R.id.m_btn_profile)
         m_user_name = findViewById(R.id.m_user_name)
+        loader = findViewById(R.id.loader)
         categoryList = ArrayList()
+
+        m_btn_profile.setOnClickListener{
+            val intent = Intent(this@MainActivity,ProfileScreen::class.java)
+            startActivity(intent)
+        }
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        finishAffinity()
     }
 }

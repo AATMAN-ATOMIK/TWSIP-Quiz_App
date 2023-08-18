@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/linear_background"
+    tools:context=".activities.ProfileScreen">
+
+    <ImageButton
+        android:id="@+id/p_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/baseline_arrow_back_24"
+        android:backgroundTint="@color/transperant"
+        android:foregroundTint="@color/white"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="Profie"
+        android:textSize="28dp"
+        android:textColor="@color/white"
+        android:fontFamily="@font/hanged_letters"/>
+
+    <ImageButton
+        android:id="@+id/p_logout"
+        android:layout_alignParentEnd="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/baseline_logout_24"
+        android:backgroundTint="@color/transperant"
+        android:foregroundTint="@color/white"/>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/p_pinfo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_below="@id/p_back"
+        android:backgroundTint="@color/white">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="10dp">
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/p_profile_image"
+                android:layout_width="100dp"
+                android:layout_centerVertical="true"
+                app:lottie_rawRes="@raw/user"
+                app:lottie_autoPlay="true"
+                app:lottie_loop="true"
+                android:layout_height="100dp" />
+
+            <TextView
+                android:id="@+id/p_userName"
+                android:layout_width="match_parent"
+                android:gravity="center"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:textSize="20sp"
+                android:textColor="@color/purple"
+                android:fontFamily="@font/chocolate_bar_demo"
+                android:layout_toEndOf="@id/p_profile_image"
+                android:text="@string/user_name" />
+
+        </RelativeLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/p_pinfo">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/my_scores"
+                android:gravity="center"
+                android:textColor="@color/purple"
+                android:fontFamily="@font/hanged_letters"
+                android:textSize="20sp"/>
+
+            <ListView
+                android:layout_marginTop="5dp"
+                android:id="@+id/p_score_listView"
+                android:layout_width="match_parent"
+                tools:listitem="@layout/profile_listview_item"
+                android:layout_height="match_parent"/>
+
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+
+
+</RelativeLayout>

@@ -6,10 +6,15 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.TextView
 import android.widget.Toast
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.airbnb.lottie.LottieAnimationView
 import com.atomikak.quizapp.R
+import com.atomikak.quizapp.adapters.ScoreAdapter
 import com.atomikak.quizapp.supportclasses.Score
 import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import de.hdodenhof.circleimageview.CircleImageView
@@ -23,7 +28,7 @@ class ScoreActivity : AppCompatActivity() {
     private lateinit var key: String
     private lateinit var difficulty: String
     private lateinit var QuizName: String
-    private var highScore: String?="0"
+    private var highScore: String? = "0"
     private lateinit var userName: String
     private var uid: String = FirebaseAuth.getInstance().uid.toString()
     private var totalQue: Int = 0
@@ -35,8 +40,16 @@ class ScoreActivity : AppCompatActivity() {
     private lateinit var tv_correct: TextView
     private lateinit var tv_incorrect: TextView
 
+    //RecyclerView
+    private lateinit var recv_scores: RecyclerView
+    private lateinit var scoreAdapter: ScoreAdapter
+
+    //lists
+    private lateinit var scoreList: ArrayList<Score>
+
     //circular image view
-    private lateinit var s_rImage: CircleImageView
+    private lateinit var s_rImage: LottieAnimationView
+    private lateinit var s_loader: LottieAnimationView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,9 +73,9 @@ class ScoreActivity : AppCompatActivity() {
         tv_incorrect.setText("Incorrect : $incorrect")
 
         if ((correct.toInt() * 100) / totalQue.toInt() > 40) {
-            Glide.with(this@ScoreActivity).load(R.drawable.success).into(s_rImage)
+            s_rImage.setAnimation(R.raw.trophie)
         } else {
-            Glide.with(this@ScoreActivity).load(R.drawable.defeat).into(s_rImage)
+            s_rImage.setAnimation(R.raw.try_again)
         }
 
 
@@ -74,27 +87,68 @@ class ScoreActivity : AppCompatActivity() {
                     Log.d("DD: ", error.message.toString())
                 }
 
-                if(value!!.get("highscore").toString()==""){
-                    highScore = "0"
-                    val myscore = Score(score, userName)
-                    storeData(myscore)
-                }else{
-                    highScore = value.get("highscore").toString()
+                try {
+                    highScore = value!!.get("highscore").toString()
                     if (highScore!!.toInt() < score.toInt()) {
-                        val myscore = Score(score, userName)
+                        val collectionRef = db.collection("Users").document(FirebaseAuth.getInstance().uid.toString()).get().addOnCompleteListener {
+                            val myscore = Score(score, it.result.get("name").toString())
+                            storeData(myscore)
+                        }
+                    }
+                } catch (e: Exception) {
+                    highScore = "0"
+                    val collectionRef = db.collection("Users").document(FirebaseAuth.getInstance().uid.toString()).get().addOnCompleteListener {
+                        val myscore = Score(score, it.result.get("name").toString())
                         storeData(myscore)
                     }
                 }
             }
-
     }
 
 
     private fun storeData(myscore: Score) {
-        Toast.makeText(this, "ho", Toast.LENGTH_SHORT).show()
         val colleRef = db.collection("Quiz Category").document(key).collection("$difficulty Score")
-        colleRef.document(uid).set(myscore).addOnFailureListener {
+        colleRef.document(uid).set(myscore)
+            .addOnCompleteListener {
+                val userRef = Firebase.firestore.collection("Users").document(FirebaseAuth.getInstance().uid.toString()).collection("Score").document("MyScores").update(
+                    mapOf(Pair("$QuizName $difficulty", score))).addOnFailureListener{
+                    Toast.makeText(this@ScoreActivity, "hi,${it.message.toString()}", Toast.LENGTH_SHORT).show()
+                }
+            }
+            .addOnFailureListener {
             Log.d("DD: ", it.message.toString())
+        }
+        getScoreList()
+    }
+
+    private fun getScoreList() {
+        scoreList.clear()
+        val colleRef = db.collection("Quiz Category").document(key).collection("$difficulty Score")
+            .orderBy("highscore", Query.Direction.DESCENDING)
+            .get().addOnCompleteListener {
+                for (score in it.result) {
+                    scoreList.add(
+                        Score(
+                            score.getString("highscore").toString(),
+                            score.get("c_name").toString(),
+                        )
+                    )
+                }
+                loadScores()
+            }
+            .addOnFailureListener {
+                Log.d("DD: ", it.message.toString())
+            }
+    }
+
+    private fun loadScores() {
+        if (scoreList.isNotEmpty()) {
+            scoreAdapter = ScoreAdapter(this@ScoreActivity, scoreList)
+            recv_scores.layoutManager =
+                LinearLayoutManager(this@ScoreActivity, LinearLayoutManager.VERTICAL, false)
+            recv_scores.setHasFixedSize(true)
+            recv_scores.adapter = scoreAdapter
+            s_loader.visibility = LottieAnimationView.GONE
         }
     }
 
@@ -103,12 +157,15 @@ class ScoreActivity : AppCompatActivity() {
         tv_score = findViewById(R.id.score)
         tv_correct = findViewById(R.id.correct)
         tv_incorrect = findViewById(R.id.incorrect)
+        recv_scores = findViewById(R.id.recv_scores)
         s_rImage = findViewById(R.id.s_rImage)
+        s_loader = findViewById(R.id.s_loader)
+        scoreList = ArrayList()
     }
 
     override fun onBackPressed() {
         super.onBackPressed()
-        val intent = Intent(this@ScoreActivity,MainActivity::class.java)
+        val intent = Intent(this@ScoreActivity, MainActivity::class.java)
         startActivity(intent)
     }
 }

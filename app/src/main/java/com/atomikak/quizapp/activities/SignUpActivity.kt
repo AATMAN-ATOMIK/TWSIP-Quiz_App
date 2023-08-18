@@ -86,4 +86,9 @@ class SignUpActivity : AppCompatActivity() {
         val intent = Intent(this@SignUpActivity, toClass)
         startActivity(intent)
     }
+    override fun onBackPressed() {
+        super.onBackPressed()
+        val intent = Intent(this@SignUpActivity, LoginActivity::class.java)
+        startActivity(intent)
+    }
 }

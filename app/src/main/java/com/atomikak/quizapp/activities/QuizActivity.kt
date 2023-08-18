@@ -2,7 +2,6 @@ package com.atomikak.quizapp.activities
 
 import android.annotation.SuppressLint
 import android.content.Intent
-import android.content.res.ColorStateList
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CountDownTimer
@@ -10,7 +9,6 @@ import android.os.Handler
 import android.util.Log
 import android.view.View
 import android.widget.TextView
-import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.airbnb.lottie.LottieAnimationView
@@ -74,7 +72,7 @@ class QuizActivity : AppCompatActivity(), RecvClickListener {
     }
 
     private fun startTimer() {
-        countDownTimer = object : CountDownTimer(10000, 1000) {
+        countDownTimer = object : CountDownTimer(30000, 1000) {
             override fun onTick(millisUntilFinished: Long) {
                 q_timer.setText("Time Ramain ${millisUntilFinished / 1000}s")
             }
@@ -154,20 +152,26 @@ class QuizActivity : AppCompatActivity(), RecvClickListener {
     }
 
     @SuppressLint("ResourceAsColor")
-    override fun onItemClick(it: View, position: Int, answer: String) {
+    override fun onItemClick(view: View, position: Int, answer: String) {
         if (quizList[position].correct == answer) {
-            it.setBackgroundResource(R.drawable.positive_button)
+            view.setBackgroundResource(R.drawable.positive_button)
             score++
             correct++
         } else {
-            it.setBackgroundResource(R.drawable.negative_button)
+            view.setBackgroundResource(R.drawable.negative_button)
             incorrect++
         }
 
         countDownTimer.cancel()
         Handler().postDelayed({
+            view.setBackgroundResource(R.drawable.button_quiz_option)
             goToNextQuestion()
-        }, 2000)
+        }, 800)
 
+    }
+    override fun onBackPressed() {
+        super.onBackPressed()
+        val intent = Intent(this@QuizActivity, MainActivity::class.java)
+        startActivity(intent)
     }
 }

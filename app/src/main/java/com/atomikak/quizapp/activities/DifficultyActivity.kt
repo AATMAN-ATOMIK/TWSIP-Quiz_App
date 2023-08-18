@@ -93,4 +93,10 @@ class DifficultyActivity : AppCompatActivity() {
         d_dif_medium = findViewById(R.id.d_dif_medium)
         d_dif_hard = findViewById(R.id.d_dif_hard)
     }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        val intent = Intent(this@DifficultyActivity, MainActivity::class.java)
+        startActivity(intent)
+    }
 }

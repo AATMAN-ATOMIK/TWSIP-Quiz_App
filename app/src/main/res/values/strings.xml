@@ -19,4 +19,7 @@
     <string name="question_1_10">Question 1 / 10</string>
     <string name="timer">Time Remain 60s</string>
     <string name="complete">Quiz Completed</string>
+    <string name="_100">100</string>
+    <string name="score">Score</string>
+    <string name="my_scores">My Scores</string>
 </resources>
