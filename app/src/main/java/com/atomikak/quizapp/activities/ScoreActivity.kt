@@ -1,6 +1,7 @@
 package com.atomikak.quizapp.activities
 
 import android.content.Intent
+import android.media.MediaPlayer
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -50,6 +51,7 @@ class ScoreActivity : AppCompatActivity() {
     //circular image view
     private lateinit var s_rImage: LottieAnimationView
     private lateinit var s_loader: LottieAnimationView
+    private lateinit var s_btn_profile: LottieAnimationView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -74,8 +76,10 @@ class ScoreActivity : AppCompatActivity() {
 
         if ((correct.toInt() * 100) / totalQue.toInt() > 40) {
             s_rImage.setAnimation(R.raw.trophie)
+            playMedia("success")
         } else {
             s_rImage.setAnimation(R.raw.try_again)
+            playMedia("fail")
         }
 
 
@@ -90,19 +94,39 @@ class ScoreActivity : AppCompatActivity() {
                 try {
                     highScore = value!!.get("highscore").toString()
                     if (highScore!!.toInt() < score.toInt()) {
-                        val collectionRef = db.collection("Users").document(FirebaseAuth.getInstance().uid.toString()).get().addOnCompleteListener {
-                            val myscore = Score(score, it.result.get("name").toString())
-                            storeData(myscore)
-                        }
+                        val collectionRef = db.collection("Users")
+                            .document(FirebaseAuth.getInstance().uid.toString()).get()
+                            .addOnCompleteListener {
+                                val myscore = Score(score, it.result.get("name").toString())
+                                storeData(myscore)
+                            }
                     }
                 } catch (e: Exception) {
                     highScore = "0"
-                    val collectionRef = db.collection("Users").document(FirebaseAuth.getInstance().uid.toString()).get().addOnCompleteListener {
-                        val myscore = Score(score, it.result.get("name").toString())
-                        storeData(myscore)
-                    }
+                    val collectionRef =
+                        db.collection("Users").document(FirebaseAuth.getInstance().uid.toString())
+                            .get().addOnCompleteListener {
+                                val myscore = Score(score, it.result.get("name").toString())
+                                storeData(myscore)
+                            }
                 }
+                getScoreList()
             }
+
+        s_btn_profile.setOnClickListener{
+            val intent = Intent(this@ScoreActivity,ProfileScreen::class.java)
+            startActivity(intent)
+        }
+    }
+
+    private fun playMedia(s: String) {
+        if (s == "success") {
+            val mediaPlayer = MediaPlayer.create(this@ScoreActivity, R.raw.successsong)
+            mediaPlayer.start()
+        } else {
+            val mediaPlayer = MediaPlayer.create(this@ScoreActivity, R.raw.failsong)
+            mediaPlayer.start()
+        }
     }
 
 
@@ -110,15 +134,21 @@ class ScoreActivity : AppCompatActivity() {
         val colleRef = db.collection("Quiz Category").document(key).collection("$difficulty Score")
         colleRef.document(uid).set(myscore)
             .addOnCompleteListener {
-                val userRef = Firebase.firestore.collection("Users").document(FirebaseAuth.getInstance().uid.toString()).collection("Score").document("MyScores").update(
-                    mapOf(Pair("$QuizName $difficulty", score))).addOnFailureListener{
-                    Toast.makeText(this@ScoreActivity, "hi,${it.message.toString()}", Toast.LENGTH_SHORT).show()
-                }
+                val userRef = Firebase.firestore.collection("Users")
+                    .document(FirebaseAuth.getInstance().uid.toString()).collection("Score")
+                    .document("MyScores").update(
+                        mapOf(Pair("$QuizName $difficulty", score))
+                    ).addOnFailureListener {
+                        Toast.makeText(
+                            this@ScoreActivity,
+                            "hi,${it.message.toString()}",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
             }
             .addOnFailureListener {
-            Log.d("DD: ", it.message.toString())
-        }
-        getScoreList()
+                Log.d("DD: ", it.message.toString())
+            }
     }
 
     private fun getScoreList() {
@@ -127,6 +157,7 @@ class ScoreActivity : AppCompatActivity() {
             .orderBy("highscore", Query.Direction.DESCENDING)
             .get().addOnCompleteListener {
                 for (score in it.result) {
+                    Log.d("DD:", score.get("c_name").toString())
                     scoreList.add(
                         Score(
                             score.getString("highscore").toString(),
@@ -159,6 +190,7 @@ class ScoreActivity : AppCompatActivity() {
         tv_incorrect = findViewById(R.id.incorrect)
         recv_scores = findViewById(R.id.recv_scores)
         s_rImage = findViewById(R.id.s_rImage)
+        s_btn_profile = findViewById(R.id.s_btn_profile)
         s_loader = findViewById(R.id.s_loader)
         scoreList = ArrayList()
     }

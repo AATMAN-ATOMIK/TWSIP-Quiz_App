@@ -192,6 +192,7 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recv_scores"
                 android:layout_width="match_parent"
+                android:layoutAnimation="@anim/recycler_view_animate"
                 android:layout_height="match_parent"
                 android:paddingHorizontal="5dp"
                 tools:listitem="@layout/scores_list_item" />

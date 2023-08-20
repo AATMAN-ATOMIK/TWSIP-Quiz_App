@@ -46,29 +46,33 @@ class SignUpActivity : AppCompatActivity() {
         //button register on click event
         su_btn_register.setOnClickListener {
             if (!(su_ed_userNmae.text.isNullOrEmpty() && su_ed_email.text.isNullOrEmpty() && su_ed_pass.text.isNullOrEmpty())) {
-                firebaseAuth.createUserWithEmailAndPassword(
-                    su_ed_email.text.toString(),
-                    su_ed_pass.text.toString()
-                )
-                    .addOnSuccessListener {
-                        dbUser.collection("Users").document(it.user!!.uid).set(
-                            User(
-                                name = su_ed_userNmae.text.toString(),
-                                email = su_ed_email.text.toString(),
-                                pass = su_ed_pass.text.toString()
-                            )
-                        ).addOnSuccessListener {
-                            val intent=Intent(this@SignUpActivity,MainActivity::class.java)
-                            startActivity(intent)
+                if (su_ed_pass.text.length >= 6) {
+                    firebaseAuth.createUserWithEmailAndPassword(
+                        su_ed_email.text.toString(),
+                        su_ed_pass.text.toString()
+                    )
+                        .addOnSuccessListener {
+                            dbUser.collection("Users").document(it.user!!.uid).set(
+                                User(
+                                    name = su_ed_userNmae.text.toString(),
+                                    email = su_ed_email.text.toString(),
+                                    pass = su_ed_pass.text.toString()
+                                )
+                            ).addOnSuccessListener {
+                                val intent = Intent(this@SignUpActivity, MainActivity::class.java)
+                                startActivity(intent)
+                            }
                         }
-                    }
-                    .addOnFailureListener {
-                        Log.d( "DD: " , it.localizedMessage)
-                    }
-            }else{
-                su_ed_userNmae.setError("Required")
-                su_ed_email.setError("Required")
-                su_ed_pass.setError("Required")
+                        .addOnFailureListener {
+                            Log.d("DD: ", it.localizedMessage)
+                        }
+                }else{
+                    su_ed_pass.error = "Password Must Be 6 Character Long."
+                }
+            } else {
+                su_ed_userNmae.error = "Required"
+                su_ed_email.error = "Required"
+                su_ed_pass.error = "Required"
             }
         }
     }
@@ -86,6 +90,7 @@ class SignUpActivity : AppCompatActivity() {
         val intent = Intent(this@SignUpActivity, toClass)
         startActivity(intent)
     }
+
     override fun onBackPressed() {
         super.onBackPressed()
         val intent = Intent(this@SignUpActivity, LoginActivity::class.java)

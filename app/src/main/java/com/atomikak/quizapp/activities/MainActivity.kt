@@ -78,12 +78,13 @@ class MainActivity : AppCompatActivity() {
         if (categoryList.isEmpty()) {
             Toast.makeText(this, "hi", Toast.LENGTH_SHORT).show()
         } else {
+            loader.visibility = LottieAnimationView.GONE
             cAdapter = CategoryAdapter(this@MainActivity, categoryList,m_user_name.text.toString())
             m_recv_category.layoutManager =
                 GridLayoutManager(this@MainActivity, 2, GridLayoutManager.VERTICAL, false)
             m_recv_category.setHasFixedSize(true)
             m_recv_category.adapter = cAdapter
-            loader.visibility = LottieAnimationView.GONE
+
         }
     }
 

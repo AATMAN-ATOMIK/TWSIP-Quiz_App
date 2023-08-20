@@ -69,6 +69,8 @@ class QuizActivity : AppCompatActivity(), RecvClickListener {
 
         startTimer()
 
+        q_quiz_category.text = intent.getStringExtra("c_name").toString()
+
     }
 
     private fun startTimer() {
@@ -166,7 +168,7 @@ class QuizActivity : AppCompatActivity(), RecvClickListener {
         Handler().postDelayed({
             view.setBackgroundResource(R.drawable.button_quiz_option)
             goToNextQuestion()
-        }, 800)
+        }, 1200)
 
     }
     override fun onBackPressed() {

@@ -3,29 +3,28 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@drawable/linear_background"
     android:layout_height="match_parent"
+    android:background="@drawable/linear_background"
     tools:context=".activities.QuizActivity">
 
     <RelativeLayout
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
         android:id="@+id/q_tool_Bar"
-        android:paddingVertical="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        >
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingVertical="10dp">
 
         <TextView
             android:id="@+id/q_quiz_category"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
             android:fontFamily="@font/chocolate_bar_demo"
             android:paddingHorizontal="10dp"
             android:shadowColor="@color/black"
             android:shadowDx="10"
             android:shadowDy="8"
-            android:layout_centerVertical="true"
             android:shadowRadius="2"
             android:text="@string/quiz_name"
             android:textColor="@color/white"
@@ -38,9 +37,9 @@
             android:layout_height="40dp"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
+            android:layout_marginHorizontal="10dp"
             app:lottie_autoPlay="true"
             app:lottie_loop="true"
-            android:layout_marginHorizontal="10dp"
             app:lottie_rawRes="@raw/user"
             app:lottie_speed="0.2" />
 
@@ -51,34 +50,33 @@
         android:id="@+id/q_que_counter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/question_1_10"
         android:layout_below="@id/q_tool_Bar"
         android:layout_marginTop="40dp"
-        android:textColor="@color/white"
-        android:textStyle="bold"
         android:paddingHorizontal="10dp"
-        android:textSize="18sp"/>
+        android:text="@string/question_1_10"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/q_timer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/timer"
         android:layout_below="@id/q_tool_Bar"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="40dp"
-        android:textColor="@color/white"
-        android:textStyle="bold"
         android:paddingHorizontal="10dp"
-        android:textSize="18sp"/>
+        android:text="@string/timer"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:textStyle="bold" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recv_questions"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-
         android:layout_below="@id/q_que_counter"
-        tools:listitem="@layout/question_layout"
-        />
+        android:layoutAnimation="@anim/recycler_view_animate"
+        tools:listitem="@layout/question_layout" />
 
 </RelativeLayout>
