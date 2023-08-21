@@ -107,6 +107,7 @@ class ScoreActivity : AppCompatActivity() {
                     }
                 } catch (e: Exception) {
                     highScore = "0"
+
                     val collectionRef =
                         db.collection("Users").document(FirebaseAuth.getInstance().uid.toString())
                             .get().addOnCompleteListener {
@@ -138,20 +139,24 @@ class ScoreActivity : AppCompatActivity() {
         val colleRef = db.collection("Quiz Category").document(key).collection("$difficulty Score")
         colleRef.document(uid).set(myscore)
             .addOnCompleteListener {
-               collectionReference.update(
-                        mapOf(Pair("$QuizName $difficulty", score))
-                    ).addOnSuccessListener {
-                   s_loader.visibility = LottieAnimationView.GONE
-               }.addOnFailureListener {
-                        collectionReference.set(
-                                mapOf(Pair("$QuizName $difficulty", score))
-                            ).addOnSuccessListener { s_loader.visibility = LottieAnimationView.GONE }.addOnFailureListener {
-                                Log.d("DD:", "${it.message.toString()}")
-                            }
-                    }
+               addScoreToProfile()
             }.addOnFailureListener {
                 Log.d("DD: ", it.message.toString())
             }
+    }
+
+    private fun addScoreToProfile() {
+        collectionReference.update(
+            mapOf(Pair("$QuizName $difficulty", score))
+        ).addOnSuccessListener {
+            s_loader.visibility = LottieAnimationView.GONE
+        }.addOnFailureListener {
+            collectionReference.set(
+                mapOf(Pair("$QuizName $difficulty", score))
+            ).addOnSuccessListener { s_loader.visibility = LottieAnimationView.GONE }.addOnFailureListener {
+                Log.d("DD:", "${it.message.toString()}")
+            }
+        }
     }
 
     private fun getScoreList() {
