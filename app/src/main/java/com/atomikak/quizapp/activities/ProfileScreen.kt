@@ -67,17 +67,21 @@ class ProfileScreen : AppCompatActivity() {
         Firebase.firestore.collection("Users").document(FirebaseAuth.getInstance().uid.toString())
             .collection("Score").document("MyScores")
             .get().addOnCompleteListener {
-                for(score in it.result.data!!.toList())
-                {
-                    scoreList.add(score)
-                }
+               if(it.result.exists()){
+                   for(score in it.result.data!!.toList())
+                   {
+                       scoreList.add(score)
+                   }
 
-                loadScoreList()
+                   loadScoreList()
+               }
             }
     }
 
     private fun loadScoreList() {
-        p_score_listView.adapter = ScoreListAdapter(this@ProfileScreen,scoreList)
+        if(!scoreList.isNullOrEmpty()){
+            p_score_listView.adapter = ScoreListAdapter(this@ProfileScreen,scoreList)
+        }
     }
 
     private fun getUserName() {

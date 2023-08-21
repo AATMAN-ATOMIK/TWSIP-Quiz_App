@@ -53,6 +53,10 @@ class ScoreActivity : AppCompatActivity() {
     private lateinit var s_loader: LottieAnimationView
     private lateinit var s_btn_profile: LottieAnimationView
 
+
+    private val collectionReference = Firebase.firestore.collection("Users")
+        .document(FirebaseAuth.getInstance().uid.toString()).collection("Score").document("MyScores")
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_score)
@@ -113,8 +117,8 @@ class ScoreActivity : AppCompatActivity() {
                 getScoreList()
             }
 
-        s_btn_profile.setOnClickListener{
-            val intent = Intent(this@ScoreActivity,ProfileScreen::class.java)
+        s_btn_profile.setOnClickListener {
+            val intent = Intent(this@ScoreActivity, ProfileScreen::class.java)
             startActivity(intent)
         }
     }
@@ -134,19 +138,18 @@ class ScoreActivity : AppCompatActivity() {
         val colleRef = db.collection("Quiz Category").document(key).collection("$difficulty Score")
         colleRef.document(uid).set(myscore)
             .addOnCompleteListener {
-                val userRef = Firebase.firestore.collection("Users")
-                    .document(FirebaseAuth.getInstance().uid.toString()).collection("Score")
-                    .document("MyScores").update(
+               collectionReference.update(
                         mapOf(Pair("$QuizName $difficulty", score))
-                    ).addOnFailureListener {
-                        Toast.makeText(
-                            this@ScoreActivity,
-                            "hi,${it.message.toString()}",
-                            Toast.LENGTH_SHORT
-                        ).show()
+                    ).addOnSuccessListener {
+                   s_loader.visibility = LottieAnimationView.GONE
+               }.addOnFailureListener {
+                        collectionReference.set(
+                                mapOf(Pair("$QuizName $difficulty", score))
+                            ).addOnSuccessListener { s_loader.visibility = LottieAnimationView.GONE }.addOnFailureListener {
+                                Log.d("DD:", "${it.message.toString()}")
+                            }
                     }
-            }
-            .addOnFailureListener {
+            }.addOnFailureListener {
                 Log.d("DD: ", it.message.toString())
             }
     }
@@ -179,7 +182,7 @@ class ScoreActivity : AppCompatActivity() {
                 LinearLayoutManager(this@ScoreActivity, LinearLayoutManager.VERTICAL, false)
             recv_scores.setHasFixedSize(true)
             recv_scores.adapter = scoreAdapter
-            s_loader.visibility = LottieAnimationView.GONE
+
         }
     }
 

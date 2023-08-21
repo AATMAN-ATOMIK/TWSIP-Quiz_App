@@ -10,6 +10,7 @@
         android:id="@+id/p_quiz_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="@color/black"
         android:fontFamily="@font/chocolate_bar_demo"
         android:layout_centerVertical="true"
         android:text="@string/quiz_name"/>
@@ -18,6 +19,7 @@
         android:paddingHorizontal="10dp"
         android:id="@+id/p_score_lable"
         android:layout_width="wrap_content"
+        android:textColor="@color/black"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:text="@string/score"
@@ -29,6 +31,7 @@
         android:layout_below="@id/p_score_lable"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="@color/black"
         android:layout_alignParentEnd="true"
         android:text="@string/score"
         android:textSize="18sp"

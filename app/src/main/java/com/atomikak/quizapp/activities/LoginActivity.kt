@@ -50,7 +50,7 @@ class LoginActivity : AppCompatActivity() {
 
                     }
                     .addOnFailureListener {
-                        Log.d("DD: ", it.localizedMessage)
+                        l_ed_pass.setError("Credentials Dose Not Match...")
                     }
             } else {
                 l_ed_email.setError("Required")

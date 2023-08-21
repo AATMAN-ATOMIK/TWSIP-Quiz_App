@@ -52,6 +52,7 @@ class SignUpActivity : AppCompatActivity() {
                         su_ed_pass.text.toString()
                     )
                         .addOnSuccessListener {
+
                             dbUser.collection("Users").document(it.user!!.uid).set(
                                 User(
                                     name = su_ed_userNmae.text.toString(),
@@ -62,6 +63,7 @@ class SignUpActivity : AppCompatActivity() {
                                 val intent = Intent(this@SignUpActivity, MainActivity::class.java)
                                 startActivity(intent)
                             }
+
                         }
                         .addOnFailureListener {
                             Log.d("DD: ", it.localizedMessage)

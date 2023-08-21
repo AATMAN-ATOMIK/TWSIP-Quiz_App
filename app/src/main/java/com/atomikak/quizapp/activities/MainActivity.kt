@@ -68,7 +68,7 @@ class MainActivity : AppCompatActivity() {
                         c_img = category.getString("c_img")!!,
                     )
                 )
-                Log.d("DD: ", category.id!!.toString())
+                Log.d("DD: ", category.id.toString())
             }
             loadCategory()
         }

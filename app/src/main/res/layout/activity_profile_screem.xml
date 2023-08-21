@@ -19,7 +19,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:text="Profie"
+        android:text="Profile"
         android:textSize="28dp"
         android:textColor="@color/white"
         android:fontFamily="@font/hanged_letters"/>
@@ -53,6 +53,7 @@
                 android:layout_width="100dp"
                 android:layout_centerVertical="true"
                 app:lottie_rawRes="@raw/user"
+                app:lottie_speed="0.2"
                 app:lottie_autoPlay="true"
                 app:lottie_loop="true"
                 android:layout_height="100dp" />
@@ -78,6 +79,7 @@
         android:layout_height="match_parent"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
+        android:backgroundTint="@color/white"
         android:layout_marginTop="10dp"
         android:layout_below="@id/p_pinfo">
 

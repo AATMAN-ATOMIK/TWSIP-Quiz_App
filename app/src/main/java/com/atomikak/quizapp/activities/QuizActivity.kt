@@ -114,7 +114,7 @@ class QuizActivity : AppCompatActivity(), RecvClickListener {
     }
 
     private fun getQuestions() {
-        collectionRef.addSnapshotListener { value, e ->
+        collectionRef.limit(10).addSnapshotListener { value, e ->
             if (e != null) {
                 Log.d("DD: ", e.message.toString())
             }
